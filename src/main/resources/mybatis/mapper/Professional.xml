@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.ProfessionalDao" >
+
+    <resultMap id="ProfessionalResultMap" type="com.example.demo.model.Professional"  >
+        <id property="id" column="id"/>
+        <result column="title" property="title" />
+        <result column="description" property="description" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <select id="get" parameterType="Object" resultMap="ProfessionalResultMap">
+        <![CDATA[
+
+        select * from professional where id = #{id}
+
+        ]]>
+    </select>
+
+    <select id="all" resultMap="ProfessionalResultMap" >
+        select * from professional order by create_time desc
+    </select>
+
+    <insert id="save" keyProperty="id" parameterType="com.example.demo.model.Professional">
+        insert into professional
+        (id,title,description,create_time)
+        values
+        (#{id},#{title},#{description},#{createTime})
+    </insert>
+
+    <update id="update" parameterType="com.example.demo.model.Professional">
+        update professional
+        set
+        title = #{title},
+        description = #{description}
+        where
+        id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Object">
+        delete from professional where id = #{id}
+    </delete>
+
+</mapper>

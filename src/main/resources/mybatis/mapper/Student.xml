@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.StudentDao" >
+
+    <resultMap id="StudentResultMap" type="com.example.demo.model.Student" extends="com.example.demo.dao.PeopleResultMap"  >
+        <association property="clazz" column="class" select="getClass"></association>
+    </resultMap>
+
+    <select id="getClass" parameterType="Object" resultType="com.example.demo.model.Class">
+        <![CDATA[
+
+        select * from class where id = #{class_id}
+
+        ]]>
+    </select>
+
+    <select id="get" parameterType="Object" resultMap="StudentResultMap">
+        <![CDATA[
+
+        select * from student where id = #{id}
+
+        ]]>
+    </select>
+
+    <select id="all" resultMap="StudentResultMap" >
+        select * from student order by create_time desc
+    </select>
+
+    <insert id="save" keyProperty="id" parameterType="com.example.demo.model.Student">
+        insert into student
+        (id,name,age,gender,class_id,create_time)
+        values
+        (#{id},#{name},#{age},#{gender},#{clazz.id},#{createTime})
+    </insert>
+
+    <update id="update" parameterType="com.example.demo.model.Student">
+        update student
+        set
+        name = #{name},
+        age = #{age},
+        gender = #{gender},
+        class_id = #{clazz.id}
+        where
+        id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Object">
+        delete from student where id = #{id}
+    </delete>
+
+    <select id="query" parameterType="java.lang.String" resultMap="StudentResultMap">
+        select * from student where name like "%"#{name}"%"
+    </select>
+
+</mapper>
