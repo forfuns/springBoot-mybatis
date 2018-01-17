@@ -6,6 +6,17 @@ a spring-boot with mybatis basic demo
 
 idea import maven project
 
+## configure
+
+程序主要配置文件
+`src/resources/application.properties`
+
+mybatis mapper
+`src/resources/mybatis/*`
+
+
+
+
 ## build
 
 `mvn package`
