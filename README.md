@@ -8,6 +8,9 @@ idea import maven project
 
 ## configure
 
+spring-boot 入口
+`src/java/com/example/demo/DemoApplication`
+
 程序主要配置文件
 `src/resources/application.properties`
 
